@@ -12,7 +12,7 @@
     },
 
     "GOVAPI": {
-      "HOST": "http://172.16.1.121/govshell-reverse-proxy",
+      "HOST": "http://10.10.100.44/govshell-reverse-proxy",
       "LOGOUT_URL": "/logout"
     },
 

@@ -5,7 +5,7 @@
     {
       "id": "govregistry",
       "name": "GovRegistry",
-      "app_url": "http://172.16.1.121/govregistry-app",
+      "app_url": "http://10.10.100.44/govregistry-app",
       "logo": {
         "type": "bootstrap",
         "url": "",
@@ -19,7 +19,7 @@
     {
       "id": "govio",
       "name": "GovIO",
-      "app_url": "http://172.16.1.121/govio-app",
+      "app_url": "http://10.10.100.44/govio-app",
       "logo": {
         "type": "svg",
         "url": "",
@@ -27,20 +27,6 @@
         "micon": "",
         "icon_url": "./assets/images/app-icons/govio-icon.svg",
         "bg_color": "#1376e3",
-        "color": "#ffffff"
-      }
-    },
-    {
-      "id": "riconciliatore",
-      "name": "Riconciliatore",
-      "app_url": "http://172.16.1.121/govrevs-app",
-      "logo": {
-        "type": "bootstrap",
-        "url": "",
-        "icon": "bank",
-        "micon": "",
-        "icon_url": "",
-        "bg_color": "#4c8bb9",
         "color": "#ffffff"
       }
     }

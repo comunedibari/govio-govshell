@@ -1,18 +1,18 @@
 {
   "/logout": {
-    "target": "http://172.16.1.121:8083/govshell-reverse-proxy",
+    "target": "http://10.10.100.44:8083/govshell-reverse-proxy",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true
   },
   "/do-login": {
-    "target": "http://172.16.1.121:8083/govshell-reverse-proxy",
+    "target": "http://10.10.100.44:8083/govshell-reverse-proxy",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true
   },
   "/profile": {
-    "target": "http://172.16.1.121:8083/govshell-reverse-proxy",
+    "target": "http://10.10.100.44:8083/govshell-reverse-proxy",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true,
