@@ -98,10 +98,10 @@
           "--fly-out-back-top": "#e20a16",
           "--fly-out-color-top": "#ffffff",
           "--fly-out-color-link": "#e20a16",
-          "--btn-confirm": "#1f75cb",
+          "--btn-confirm": "#484f54",
           "--btn-confirm-color": "#ffffff",
-          "--btn-confirm-hover": "#1068bf",
-          "--btn-confirm--hovershadow": "#064787"
+          "--btn-confirm-hover": "#34393c",
+          "--btn-confirm--hovershadow": "#0f1011"
         }
       }
     ]
