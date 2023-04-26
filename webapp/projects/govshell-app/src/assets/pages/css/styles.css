@@ -1,0 +1,95 @@
+/* styles.css */
+
+footer{
+	background: #0071A9;
+	color: #ffffff;
+	font-size: .88889rem;
+}
+footer a,
+footer h1,
+footer h2,
+footer h3,
+footer h4,
+footer h5,
+footer h6{
+	color: #fff;
+}
+footer a{
+	font-weight: 600;
+	text-decoration: underline !important;
+}
+footer a:hover{
+	color: #f2f2f2;
+	text-decoration: underline !important;
+}
+/* footer-logo-wrapper */
+footer .footer-logo-wrapper .footer-logo-wrapper-content{
+	padding: 24px 0 0;
+}
+footer .footer-logo-wrapper .footer-logo-wrapper-content .custom-logo{
+	display: -webkit-inline-flex;
+	display: -ms-inline-flexbox;
+	display: inline-flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+}
+footer .footer-logo-wrapper .footer-logo-wrapper-content .custom-logo h1{
+	font-size: 1.78rem;	
+	margin-left: 20px;
+}
+
+/* footer-middle-wrapper */
+footer .footer-middle-wrapper .footer-middle-wrapper-content{
+	padding: 24px 0;
+}
+footer .footer-middle-wrapper .footer-middle-wrapper-content .social-icons{
+  display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+}
+footer .footer-middle-wrapper .footer-middle-wrapper-content .social-icons > span{
+  margin-right: 15px;
+  font-size: .77778rem;
+  font-weight: 600;
+}
+footer .footer-middle-wrapper .footer-middle-wrapper-content .social-icons .social-icon{
+	background: transparent;
+	border-radius: 100%;
+	display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 30px;
+	height: 30px;
+	text-align: center;
+}
+footer .footer-middle-wrapper .footer-middle-wrapper-content .social-icons .social-icon .icon{
+	fill: #fff;
+  width: 25px;
+  height: 25px;
+}
+footer .footer-middle-wrapper .footer-middle-wrapper-content .social-icons .social-icon:hover{
+	background: #fff;
+}
+footer .footer-middle-wrapper .footer-middle-wrapper-content .social-icons .social-icon:hover .icon{
+	fill: #0071A9;
+}
+
+/* footer-bottom-wrapper */
+footer .footer-bottom-wrapper{
+	padding: 10px 0px;
+	background: #008cd2;
+	font-size: .83334rem;
+}
+
+.vertical {
+	border-left: 1px solid #ffffff;
+	height: 34px;
+	position:absolute;
+	left: 50%;
+}

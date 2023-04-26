@@ -1,4 +1,4 @@
-<header class="navbar navbar-gitlab navbar-expand-sm js-navbar" *ngIf="_showHeaderBar">
+<header class="navbar navbar-gitlab navbar-expand-sm js-navbar border-bottom" *ngIf="_showHeaderBar">
   <div class="container-fluid">
     <div class="header-container w-100">
       <app-head-bar
@@ -11,6 +11,7 @@
         [menu-app-action-list]="_menuAppActions"
         [menu-shell-action]="_menuShellAction"
         [language-list]="_languages"
+        [has-sidebar]="_hasSideBar"
         [show-language-menu]="false"
         [current-language]="_language"
         (on-change-language)="_onChangeLanguage($event)"
@@ -82,6 +83,21 @@
     </div>
   </div>
 </div>
+<footer id="footer" class="px-0" [class.expanded]="_expandedFooter" *ngIf="_showFooterBar">
+  <div id="footerExpander" class="footer-expander" (click)="_toggleExpandFooter($event)">
+    <i class="bi bi-chevron-compact-down" *ngIf="_expandedFooter"></i>
+    <i class="bi bi-chevron-compact-up" *ngIf="!_expandedFooter"></i>
+  </div>
+  <div id="footerExpanderClose" class="footer-expander-alt" (click)="_toggleExpandFooter($event)">
+    <i class="bi bi-x-lg"></i>
+  </div>
+  <div class="h-100" [innerHtml]="_footerHtml | safeHtml" *ngIf="_expandedFooter">
+    <!-- /assets/pages/footer.html -->
+  </div>
+  <div class="h-100" [innerHtml]="_footerSmallHtml | safeHtml" *ngIf="!_expandedFooter">
+    <!-- /assets/pages/footer-small.html -->
+  </div>
+</footer>
 <app-spinner *ngIf="_spin"></app-spinner>
 <app-multi-snackbar></app-multi-snackbar>
 <div #watermark class="staging-box d-flex align-items-center justify-content-center" *ngIf="_config.AppConfig?.Watermark && _config.AppConfig?.WatermarkText">

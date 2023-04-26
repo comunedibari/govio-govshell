@@ -1,7 +1,8 @@
 :host ::ng-deep {
   .application-container {
-    height: calc(100vh - var(--header-height, 48px));
+    height: calc(100vh - var(--header-height, 48px) - var(--footer-height, 48px));
     margin-top: var(--content-wrapper-top, 48px);
+    margin-bottom: var(--content-wrapper-bottom, 0px);
 
     .application-frame {
       top: 0;

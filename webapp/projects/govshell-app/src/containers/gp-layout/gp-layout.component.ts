@@ -17,6 +17,11 @@ import { INavData } from './gp-sidebar-nav';
 import { GpSidebarNavHelper } from './gp-sidebar-nav.helper';
 import { navItemsMainMenu } from './_nav';
 
+import { catchError } from 'rxjs/operators';
+import { Observable } from 'rxjs/internal/Observable';
+import { of } from 'rxjs/internal/observable/of';
+import { forkJoin } from 'rxjs/internal/observable/forkJoin';
+
 import urlExist from "url-exist"
 
 @Component({
@@ -67,8 +72,18 @@ export class GpLayoutComponent implements OnInit, AfterContentChecked, OnDestroy
   tablet: boolean = false;
   mobile: boolean = false;
 
+  _hasSideBar: boolean = false;
   _showHeaderBar: boolean = false;
+  _showFooterBar: boolean = false;
+  _showFooterExpander: boolean = false;
+  _footerHeight: string = '48px';
+  _footerExpandedHeight: string = '48px';
+  _footerExpandedOver: boolean = false;
+  _expandedFooter: boolean = false;
   _forceMenuOpen: boolean = false;
+
+  _footerHtml: string = '';
+  _footerSmallHtml: string = '';
 
   _title: string = '';
 
@@ -96,15 +111,23 @@ export class GpLayoutComponent implements OnInit, AfterContentChecked, OnDestroy
     public sidebarNavHelper: GpSidebarNavHelper
   ) {
     this._config = this.configService.getConfiguration();
+    this._hasSideBar = this._config.AppConfig.Layout.hasSideBar || false;
     this._showHeaderBar = this._config.AppConfig.Layout.showHeaderBar || false;
+    this._showFooterBar = this._config.AppConfig.Layout.showFooterBar || false;
+    this._showFooterExpander = this._config.AppConfig.Layout.showFooterExpander || false;
+    this._footerHeight = this._config.AppConfig.Layout.footerHeight || '48px';
+    this._footerExpandedHeight = this._config.AppConfig.Layout.footerExpandedHeight || '48px';
+    this._footerExpandedOver = this._config.AppConfig.Layout.footerExpandedOver || false;
     this._forceMenuOpen = this._config.AppConfig.Layout.forceMenuOpen || false;
     this._title = this._config.AppConfig.Layout.Header.title;
     this._menuShellAction.title = this._config.AppConfig.Layout.Header.title;
 
-    if (!this._showHeaderBar) {
-      document.documentElement.style.setProperty('--header-height', this._showHeaderBar ? '48px' : '0px');
-      document.documentElement.style.setProperty('--content-wrapper-top', this._showHeaderBar ? '48px' : '0px');
-    }
+    document.documentElement.style.setProperty('--header-height', this._showHeaderBar ? '48px' : '0px');
+    document.documentElement.style.setProperty('--content-wrapper-top', this._showHeaderBar ? '48px' : '0px');
+
+    document.documentElement.style.setProperty('--footer-height', this._showFooterBar ? this._footerHeight : '0px');
+    document.documentElement.style.setProperty('--footer-expanded-height', this._showFooterBar ? this._footerExpandedHeight : '0px');
+    document.documentElement.style.setProperty('--content-wrapper-bottom', this._showFooterBar ? this._footerHeight : '0px');
 
     if (this._config.NavMenu && this._config.NavMenu.length > 0) {
       this.navItems = this._config.NavMenu;
@@ -121,6 +144,8 @@ export class GpLayoutComponent implements OnInit, AfterContentChecked, OnDestroy
     this._initLanguages();
     this._initMenuActions();
     this._onResize();
+
+    this._loadFooter();
   }
 
   @HostListener('window:resize')
@@ -198,14 +223,13 @@ export class GpLayoutComponent implements OnInit, AfterContentChecked, OnDestroy
     this._spin = true;
     this.apiService.getList('profile').subscribe(
       (response: any) => {
-        // console.log('profile response', response);
         this.authenticationService.setCurrentSession(response);
         this.authenticationService.reloadSession();
         this._initMenuActions();
         this._spin = false;
       },
       (error: any) => {
-        console.log('loadProfile error', error.error.status, error);
+        console.log('loadProfile error', error);
         this._spin = false;
       }
     );
@@ -408,6 +432,83 @@ export class GpLayoutComponent implements OnInit, AfterContentChecked, OnDestroy
     this.navItems.forEach((item: INavData) => {
       item.expanded = false;
     });
+  }
+
+  @HostListener('click', ['$event'])
+  onClick(e: any) {
+    if (e.target.id !== 'footerExpander' && this._expandedFooter) {
+      if (this._footerExpandedOver) {
+        this._expandedFooter = false;
+      } else {
+        document.documentElement.style.setProperty('--footer-height', this._expandedFooter ? this._footerExpandedHeight : this._footerHeight);
+        document.documentElement.style.setProperty('--content-wrapper-bottom', this._expandedFooter ? this._footerExpandedHeight : this._footerHeight);
+      }
+    }
+  }
+
+  _toggleExpandFooter(event: any) {
+    event.stopPropagation();
+    this._expandedFooter = !this._expandedFooter;
+    if (!this._footerExpandedOver) {
+      document.documentElement.style.setProperty('--footer-height', this._expandedFooter ? this._footerExpandedHeight : this._footerHeight);
+      document.documentElement.style.setProperty('--content-wrapper-bottom', this._expandedFooter ? this._footerExpandedHeight : this._footerHeight);
+    }
+  }
+
+  _loadFooter() {
+    if (this._showFooterBar) {
+      this._loadStyle('./assets/pages/css/styles.css');
+      this._loadScript('./assets/pages/js/scripts.js');
+
+      const reqs: Observable<any>[] = [];  
+      reqs.push( this.configService.getPage('footer-small').pipe(catchError((err) => { return of(''); })) );
+      reqs.push( this.configService.getPage('footer') .pipe( catchError((err) => { return of(''); })) );
+      forkJoin(reqs).subscribe(
+        (results: Array<any>) => {
+          this._footerSmallHtml = results[0];
+          this._footerHtml = results[1];
+        },
+        (error: any) => {
+          console.log('_loadFooter forkJoin error', error);
+        }
+      );
+    }
+  }
+
+  _loadStyle(styleName: string) {
+    const head = document.getElementsByTagName('head')[0];
+
+    let cssLink = document.getElementById(
+      'footer-css'
+    ) as HTMLLinkElement;
+    if (cssLink) {
+      cssLink.href = styleName;
+    } else {
+      const style = document.createElement('link');
+      style.id = 'footer-css';
+      style.rel = 'stylesheet';
+      style.href = `${styleName}`;
+
+      head.appendChild(style);
+    }
+  }
+
+  _loadScript(scriptName: string) {
+    const head = document.getElementsByTagName('head')[0];
+
+    let jsLink = document.getElementById(
+      'footer-script'
+    ) as HTMLLinkElement;
+    if (jsLink) {
+      jsLink.href = scriptName;
+    } else {
+      const script = document.createElement('script');
+      script.id = 'footer-script';
+      script.type = 'text/javascript';
+      script.src = `${scriptName}`;
+  
+      head.appendChild(script);
+    }
   }
 
   /**
