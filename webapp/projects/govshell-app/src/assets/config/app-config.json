@@ -38,19 +38,19 @@
     "Layout": {
       "Login": {
         "title": "GovHub",
-        "logo": "logo_bari.png",
-        "header": "logo_bari.png"
+        "logo": "logo-bari.png",
+        "header": "logo-bari.png"
       },
       "hasSideBar": false,
       "showHeaderBar": true,
-      "showFooterBar": false,
+      "showFooterBar": true,
       "showFooterExpander": true,
       "footerHeight": "48px",
-      "footerExpandedHeight": "436px",
+      "footerExpandedHeight": "501px",
       "footerExpandedOver": true,
       "Header": {
         "title": "GovHub",
-        "logo": "logo_bari.png"
+        "logo": "logo-bari.png"
       },
       "forceMenuOpen": false,
       "Details": {
