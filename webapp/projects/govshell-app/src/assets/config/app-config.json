@@ -41,7 +41,13 @@
         "logo": "logo_bari.png",
         "header": "logo_bari.png"
       },
+      "hasSideBar": false,
       "showHeaderBar": true,
+      "showFooterBar": false,
+      "showFooterExpander": true,
+      "footerHeight": "48px",
+      "footerExpandedHeight": "436px",
+      "footerExpandedOver": true,
       "Header": {
         "title": "GovHub",
         "logo": "logo_bari.png"
@@ -61,6 +67,10 @@
         "Variables": {
           "--header-back-color": "#0071A9",
           "--header-color": "#ffffff",
+          "--footer-back-color": "#0071A9",
+          "--footer-color": "#ffffff",
+          "--footer-expander-back-color": "#0071A9",
+          "--footer-expander-color": "#ffffff",
           "--navbar-back-color": "#f5f5f5",
           "--navbar-color": "#303030",
           "--navbar-link-color": "#303030",
@@ -83,11 +93,16 @@
       {
         "Name": "Bari",
         "Variables": {
-          "--header-back-color": "#e20a16",
-          "--header-color": "#ffffff",
+          "--border-color": "#dbdbdb",
+          "--header-back-color": "#ffffff",
+          "--header-color": "#303030",
+          "--footer-back-color": "#565759",
+          "--footer-color": "#ffffff",
+          "--footer-expander-back-color": "#e20a16",
+          "--footer-expander-color": "#ffffff",
           "--navbar-back-color": "#f5f5f5",
           "--navbar-color": "#303030",
-          "--navbar-link-color": "#303030",
+          "--navbar-link-color": "#e20a16",
           "--navbar-toggle-back-color": "#f5f5f5",
           "--navbar-toggle-back-over-color": "#dbdbdb",
           "--navbar-toggle-over-color": "#303030",
@@ -98,7 +113,7 @@
           "--fly-out-back-top": "#e20a16",
           "--fly-out-color-top": "#ffffff",
           "--fly-out-color-link": "#e20a16",
-          "--btn-confirm": "#484f54",
+          "--btn-confirm": "#e20a16",
           "--btn-confirm-color": "#ffffff",
           "--btn-confirm-hover": "#34393c",
           "--btn-confirm--hovershadow": "#0f1011"

@@ -457,3 +457,95 @@ mat-list-item.mat-list-item:hover {
     padding: 0 !important;
   }
 }
+
+.fw-bold-600 {
+  font-weight: 600;
+}
+
+.border-bottom {
+  border-bottom: 1px solid #f0f0f0 !important;
+}
+
+.item-row-small {
+  .main-content {
+    padding: 0 !important;
+  }
+}
+
+// ng-select
+
+$tagColor: #f2f2f2; // #b8dbff;
+$tagColorHover: #dbdbdb;
+
+.ng-select {
+  .ng-arrow-wrapper {
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>");
+    width: 1em;
+    height: 1em;
+    right: 12px;
+
+    .ng-arrow {
+      display: none !important;
+    }
+  }
+
+  .ng-clear-wrapper {
+    right: 18px;
+  }
+
+  &.ng-select-opened {
+    .ng-arrow-wrapper {
+      background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill-rule='evenodd' d='M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z'/></svg>");
+      width: 1em;
+      height: 1em;
+      right: 12px;
+    }
+  }
+
+  &.ng-select-multiple {
+    .ng-select-container {
+      .ng-value-container {
+        .ng-value {
+          background-color: $tagColor;
+          border-radius: 10px;
+          .ng-value-icon{
+            &:hover {
+              background-color: $tagColorHover;
+              border-top-left-radius: 10px;
+              border-bottom-left-radius: 10px;
+            }
+            &.left {
+              border-right: 1px solid $tagColor;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.badge-tag {
+  padding: 0.5em !important;
+  font-weight: normal !important;
+  font-size: 0.8rem !important;
+}
+
+.text-bg-tags {
+  color: #333333 !important;
+  background-color: $tagColor !important;
+}
+
+.gl-show-field-errors .gl-field-error-outline {
+  border: 1px solid #dd2b0e;
+  border-radius: 6px;
+}
+
+.modal-backdrop.show {
+  opacity: 0.40 !important;
+}
+
+// Menu active
+
+.sidebar-top-level-items li.active > a.gl-link {
+  color: var(--navbar-link-active-color, #303030);
+}
