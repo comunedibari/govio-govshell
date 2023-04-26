@@ -1,8 +1,8 @@
 /* styles.css */
 
 footer{
-	background: #0071A9;
-	color: #ffffff;
+	background: #565759;
+	color: #fff;
 	font-size: .88889rem;
 }
 footer a,
@@ -77,13 +77,13 @@ footer .footer-middle-wrapper .footer-middle-wrapper-content .social-icons .soci
 	background: #fff;
 }
 footer .footer-middle-wrapper .footer-middle-wrapper-content .social-icons .social-icon:hover .icon{
-	fill: #0071A9;
+	fill: #e20a16;
 }
 
 /* footer-bottom-wrapper */
 footer .footer-bottom-wrapper{
 	padding: 10px 0px;
-	background: #008cd2;
+	background: #6e7175;
 	font-size: .83334rem;
 }
 
