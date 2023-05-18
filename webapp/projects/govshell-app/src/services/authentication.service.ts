@@ -171,7 +171,7 @@ export class AuthenticationService {
 
   hasPermission(value: string, grant = 'view') {
     const uValue = value;
-    if (this.isAdmin() || uValue === 'PUBLIC' || this._noProfile) { return true; }
+    // if (this.isAdmin() || uValue === 'PUBLIC' || this._noProfile) { return true; }
     const permissions = this.getPermissions();
     const idx = permissions.findIndex((auth: any) => auth.name === uValue);
     const permission = (idx > -1) ? permissions[idx] : null;
@@ -182,9 +182,9 @@ export class AuthenticationService {
   }
 
   hasAuthorizationsForApplication(name: string) {
-    if (this.isAdmin() || this._noProfile) { return true; }
+    // if (this.isAdmin() || this._noProfile) { return true; }
     const _auths: any[] = this.getAuthorizations();
     const idx = _auths.findIndex((auth: any) => auth.role.application.toLowerCase() === name.toLowerCase() );
-    return (idx > -1 || this.getUser() === USER_ADMIN);
+    return (idx > -1);
   }
 }
