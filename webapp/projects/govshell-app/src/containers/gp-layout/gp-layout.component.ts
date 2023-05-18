@@ -256,7 +256,7 @@ export class GpLayoutComponent implements OnInit, AfterContentChecked, OnDestroy
           const _apps = response.items || [];
           // const _apps = response.Applications || [];
           _apps.forEach(async (item: any) => {
-            if (this.authenticationService.hasAuthorizationsForApplication(item.application_name)) {
+            if (this.authenticationService.hasAuthorizationsForApplication(item.application_id)) {
               this._menuAppActions.push(
                 new MenuAction({
                   title: item.application_name,
