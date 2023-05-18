@@ -31,6 +31,7 @@
   .nav-sidebar:not(.sidebar-expanded-mobile) .toggle-sidebar-button {
     width: 55px;
     padding: 0 21px;
+    border-right: 1px solid var(--navbar-border-color, #dbdbdb);
   }
 
   .nav-sidebar:not(.sidebar-expanded-mobile) .sidebar-top-level-items > li > a {

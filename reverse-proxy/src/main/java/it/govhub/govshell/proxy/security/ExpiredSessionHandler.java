@@ -37,7 +37,7 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import it.govhub.govregistry.commons.beans.AuthenticationProblem;
+import it.govhub.govregistry.commons.api.beans.Problem;
 import it.govhub.govregistry.commons.exception.UnreachableException;
 import it.govhub.govregistry.commons.exception.handlers.RestResponseEntityExceptionHandler;
 import it.govhub.govregistry.commons.messages.SystemMessages;
@@ -57,19 +57,19 @@ public class ExpiredSessionHandler implements SessionInformationExpiredStrategy 
 		
 		HttpServletResponse response = event.getResponse();
 		
-		AuthenticationProblem problem = new AuthenticationProblem();
+		Problem problem = new Problem();
 		
-		problem.status = HttpStatus.UNAUTHORIZED.value();
-		problem.title = HttpStatus.UNAUTHORIZED.getReasonPhrase();
-		problem.detail = SystemMessages.sessionExpired();
+		problem.setStatus(HttpStatus.UNAUTHORIZED.value());
+		problem.setTitle(HttpStatus.UNAUTHORIZED.getReasonPhrase());
+		problem.setDetail(SystemMessages.sessionExpired());
 		
 		// imposto il content-type della risposta
 		response.addHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_PROBLEM_JSON_VALUE);
-		response.setStatus(problem.status);
+		response.setStatus(problem.getStatus());
 		
 		ServletOutputStream outputStream = null;
 		try{
-			problem.instance = new URI(RestResponseEntityExceptionHandler.problemTypes.get(HttpStatus.UNAUTHORIZED));
+			problem.setInstance(new URI(RestResponseEntityExceptionHandler.problemTypes.get(HttpStatus.UNAUTHORIZED)));
 			outputStream = response.getOutputStream();
 			this.jsonMapper.writeValue(outputStream, problem);
 			outputStream.flush();

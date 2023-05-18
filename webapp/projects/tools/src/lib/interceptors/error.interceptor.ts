@@ -33,7 +33,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         // console.log('logout', err.status, err);
       }
 
-      const error = { message: err.message || err.statusText, error: err.error };
+      const error = { message: err.message || err.statusText, error: err.error };
       return throwError(error);
     }));
   }

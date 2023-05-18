@@ -52,6 +52,11 @@ export class LoginComponent implements OnInit {
         };
       }
     }
+
+    this.configService.getConfig('app').subscribe(
+      (result: any) => { /* console.log(result); */ }, 
+      (err: any) => { console.error(err); }
+    );
   }
 
   ngOnInit() {
@@ -105,7 +110,6 @@ export class LoginComponent implements OnInit {
         (error: any) => {
           this.error = error;
           this.errorCode = error.error.status;
-          // console.log('login error', this.errorCode, error);
           this.loading = false;
         }
       );

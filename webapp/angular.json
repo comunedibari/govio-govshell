@@ -32,7 +32,9 @@
 							"moment",
 							"lodash",
 							"ts-md5/dist/md5",
-							"clone-deep"
+							"clone-deep",
+							"rxjs/internal/observable/forkJoin",
+							"rxjs/internal/observable/of"
 						],
 						"inlineStyleLanguage": "scss",
 						"assets": [
