@@ -39,7 +39,7 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import it.govhub.govregistry.commons.beans.AuthenticationProblem;
+import it.govhub.govregistry.commons.api.beans.Problem;
 import it.govhub.govregistry.commons.exception.UnreachableException;
 import it.govhub.govregistry.commons.exception.handlers.RestResponseEntityExceptionHandler;
 import it.govhub.govregistry.commons.messages.SystemMessages;
@@ -58,26 +58,26 @@ public class LoginFailureHandler  extends SimpleUrlAuthenticationFailureHandler 
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,	AuthenticationException exception) throws IOException, ServletException {
 		log.debug("Login request failed: {}", request);
 		
-		AuthenticationProblem problem = new AuthenticationProblem();
+		Problem problem = new Problem();
 		
 		// Non è stato possibile trovare l'utente o la password è errata
 		if (exception instanceof BadCredentialsException) {
-			problem.status = HttpStatus.FORBIDDEN.value();
-			problem.title = HttpStatus.FORBIDDEN.getReasonPhrase();
-			problem.detail = exception.getLocalizedMessage();
+			problem.setStatus(HttpStatus.FORBIDDEN.value());
+			problem.setTitle(HttpStatus.FORBIDDEN.getReasonPhrase());
+			problem.setDetail(exception.getLocalizedMessage());
 		} else {
-			problem.status = HttpStatus.INTERNAL_SERVER_ERROR.value();
-			problem.title = HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase();
-			problem.detail = SystemMessages.internalError();
+			problem.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+			problem.setTitle(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
+			problem.setDetail(SystemMessages.internalError());
 		}
 		
 		// imposto il content-type della risposta
 		response.addHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_PROBLEM_JSON_VALUE);
-		response.setStatus(problem.status);
+		response.setStatus(problem.getStatus());
 		
 		ServletOutputStream outputStream = null;
 		try{
-			problem.instance = new URI(RestResponseEntityExceptionHandler.problemTypes.get(HttpStatus.FORBIDDEN));
+			problem.setInstance(new URI(RestResponseEntityExceptionHandler.problemTypes.get(HttpStatus.FORBIDDEN)));
 			outputStream = response.getOutputStream();
 			this.jsonMapper.writeValue(outputStream, problem);
 			outputStream.flush();

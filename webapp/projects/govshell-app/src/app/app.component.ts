@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { Tools } from 'projects/tools/src/lib/tools.service';
 import { ConfigService } from 'projects/tools/src/lib/config.service';
+import { ApiClient } from 'projects/govshell-app/src/services/api.client';
 
 import { environment } from '../environments/environment.prod';
 import { registerLocaleData } from '@angular/common';
@@ -35,6 +36,7 @@ export class AppComponent implements OnInit {
     private observer: BreakpointObserver,
     private translate: TranslateService,
     private configService: ConfigService,
+    private apiClient: ApiClient,
     private tools: Tools,
   ) {
     registerLocaleData(localeEn, 'en');

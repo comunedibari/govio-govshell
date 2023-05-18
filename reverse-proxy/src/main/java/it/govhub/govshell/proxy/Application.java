@@ -41,8 +41,6 @@ import it.govhub.govregistry.commons.config.TimeZoneConfigurer;
 import it.govhub.govregistry.commons.exception.handlers.RequestRejectedExceptionHandler;
 import it.govhub.security.config.SecurityExportedBeans;
 
-
-
 /**
  * Applicazione Spring di GovShell.
  * 
@@ -53,7 +51,6 @@ import it.govhub.security.config.SecurityExportedBeans;
  */
 
 @SpringBootApplication
-@EnableScheduling
 @EnableAutoConfiguration(exclude = {ErrorMvcAutoConfiguration.class})
 @Import({CommonsExportedBeans.class, TimeZoneConfigurer.class, SecurityExportedBeans.class} )
 @EnableJpaRepositories("it.govhub.govshell.proxy.repository")

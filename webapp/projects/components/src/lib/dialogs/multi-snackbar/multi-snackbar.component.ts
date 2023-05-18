@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs';
     <div *ngFor="let snackbar of MSC.MultiSnackbar; let idx = index" [ngClass]="idx !== (MSC.MultiSnackbar.length - 1)?'old-message':''"
         class="snackbar-message d-flex flex-column flex-sm-row align-items-sm-center justify-content-sm-between">
       <p class="m-0">{{ snackbar.message }}</p>
-      <button mat-button *ngIf="snackbar.action" type="button" class="snackbar-action ms-3 text-right text-sm-center" color="accent" (click)="__cleanMessage(idx)">{{ snackbar.action }}</button>
+      <button *ngIf="snackbar.action" type="button" class="btn btn-default btn-md gl-button" (click)="__cleanMessage(idx)">{{ snackbar.action }}</button>
     </div>
   `,
   styles: [`
