@@ -20,62 +20,16 @@ default:
             - target/
     image: maven:3-openjdk-11
 
-test:
-    stage: test
-    script:
-      - mvn verify sonar:sonar -U
-    rules:
-      - if: $CI_COMMIT_BRANCH == "staging"
-        allow_failure: true
-      - if: $CI_COMMIT_BRANCH != "staging"
-        allow_failure: false
-    artifacts:
-        untracked: false
-        name: test_and_coverage_report
-        reports:
-          junit: [ reverse-proxy/target/surefire-reports/*.xml ]
-        expire_in: "1 week"
-
-build_war:
-    stage: build
-    script:
-      - mkdir ~/.ssh
-      - chmod 700 ~/.ssh 
-      - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-      - mvn -s /tmp/maven_settings/settings-repo_linkit.xml -U deploy -Pwar -DskipTests=true 
-      - cd reverse-proxy/src/main/resources/
-      - tar czf govshell-sql.tgz *.sql
-    artifacts:
-        paths:
-          - reverse-proxy/target/govshell-reverse-proxy.war
-          - reverse-proxy/src/main/resources/govshell-sql.tgz
-    rules:
-      - if: '$CI_COMMIT_TAG || $CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == "staging"'
-
-build_jar:
-    stage: build
-    script:
-      - mkdir ~/.ssh
-      - chmod 700 ~/.ssh
-      - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-      - mvn -s /tmp/maven_settings/settings-repo_linkit.xml -U deploy -DskipTests=true
-    artifacts:
-        paths:
-          - reverse-proxy/target/govshell-reverse-proxy.jar
-    rules:
-      - if: '$CI_COMMIT_TAG'        
-
 build_angular:
     stage: build
     image: node:14.18.2-alpine3.15
     script:
-      - cd webapp
       - npm install
       - npm run production-govshell
       - tar czf govshell-app.tgz dist/*  
     artifacts:
         paths:
-          - webapp/govshell-app.tgz
+          - govshell-app.tgz
     rules:
       - if: '$CI_COMMIT_TAG || $CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == "staging"'
 
@@ -85,10 +39,7 @@ upload:
     rules:
         - if: $CI_COMMIT_TAG
     script:
-        - 'curl -k --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file reverse-proxy/target/govshell-reverse-proxy.war ${PACKAGE_REGISTRY_URL}/govshell-reverse-proxy-${CI_COMMIT_TAG}.war'
-        - 'curl -k --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file reverse-proxy/target/govshell-reverse-proxy.jar ${PACKAGE_REGISTRY_URL}/govshell-reverse-proxy-${CI_COMMIT_TAG}.jar'          
-        - 'curl -k --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file webapp/govshell-app.tgz ${PACKAGE_REGISTRY_URL}/govshell-app-${CI_COMMIT_TAG}.tgz'
-        - 'curl -k --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file reverse-proxy/src/main/resources/govshell-sql.tgz ${PACKAGE_REGISTRY_URL}/govshell-sql-${CI_COMMIT_TAG}.tgz'
+        - 'curl -k --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file govshell-app.tgz ${PACKAGE_REGISTRY_URL}/govshell-app-${CI_COMMIT_TAG}.tgz'
 
 release:
     stage: release
@@ -103,8 +54,6 @@ release:
     script:
         - 'release-cli create --name "govshell-$CI_COMMIT_TAG" --tag-name $CI_COMMIT_TAG 
           --assets-link "[ 
-            {\"name\":\"govshell-reverse-proxy-${CI_COMMIT_TAG}.war\", \"url\":\"${PACKAGE_REGISTRY_URL}/govshell-reverse-proxy-${CI_COMMIT_TAG}.war\"},
-            {\"name\":\"govshell-reverse-proxy-${CI_COMMIT_TAG}.jar\", \"url\":\"${PACKAGE_REGISTRY_URL}/govshell-reverse-proxy-${CI_COMMIT_TAG}.jar\"},
             {\"name\":\"govshell-app-${CI_COMMIT_TAG}.tgz\", \"url\":\"${PACKAGE_REGISTRY_URL}/govshell-app-${CI_COMMIT_TAG}.tgz\"}
           ]"'
 
@@ -113,13 +62,8 @@ deploy_staging:
   image: kroniak/ssh-client
   script:
     - cp -r /tmp/ssh/ ~/.ssh
-    - scp -r webapp/govshell-app.tgz $DEPLOY_STAGING_SSH_HOST:/tmp/
-    - scp -r reverse-proxy/target/govshell-reverse-proxy.war $DEPLOY_STAGING_SSH_HOST:/tmp/
+    - scp -r govshell-app.tgz $DEPLOY_STAGING_SSH_HOST:/tmp/
     - ssh $DEPLOY_STAGING_SSH_HOST 'sudo tar xvf /tmp/govshell-app.tgz'
-    - ssh $DEPLOY_STAGING_SSH_HOST 'sudo systemctl stop tomcat'
     - ssh $DEPLOY_STAGING_SSH_HOST 'sudo rm -rf /usr/share/nginx/html/govshell-app/* && sudo cp -r dist/govshell-app/* /usr/share/nginx/html/govshell-app/'
-    - ssh $DEPLOY_STAGING_SSH_HOST 'sudo cp -r /tmp/govshell-reverse-proxy.war /opt/apache-tomcat-9.0.70/webapps/'  
-    - ssh $DEPLOY_STAGING_SSH_HOST 'sudo systemctl start tomcat'
-    - ssh $DEPLOY_STAGING_SSH_HOST 'sudo rm -rf /tmp/govshell-app.tgz dist /tmp/reverse-proxy.war'
   only:
     - staging

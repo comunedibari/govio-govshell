@@ -1,97 +1,59 @@
-# GovShell
+# GovShell Workspace
 
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.0.
 
-## Descrizione
+## Install
 
-Autenticazione e Proxy per l'ecosistema GovHub.
+Run `npm install`.
 
-L'autenticazione è form-based, al momento la password è uguale per tutti gli utenti:
+This command installs a package and any packages that it depends on. If the package has a package-lock the installation of dependencies will be driven by that, respecting the following order of precedence.
 
-```bash
-curl -v -X POST 'http://localhost:11001/do-login' -d "username=amministratore&password=password"
+It must be performed only if the "node_module" folder is not present or if the packages are updated.
+
+## Development server
+
+Run `npm run start-govshell` for a dev server. Navigate to `http://localhost:5200/`. The app will automatically reload if you change any of the source files.
+
+## Development server with proxy
+
+Run `npm run start-govshell-proxy` for a dev server with proxy.
+
+## Build
+
+Run `npm run distribution-govshell` to build the project. The build artifacts will be stored in the `dist/govshell-app/` directory.
+
+## Build Production
+
+Run `npm run production-govshell` to build the project clean and qwith version upgrade. The build artifacts will be stored in the `dist/govshell-app/` directory.
+
+## Application configuration
+
+To configure the application it is necessary to edit the "app-config.jon" file in the "assets/config" folder.
+
+### Host
+
+Change the "HOST" attribute in the "GOVAPI" section:
+
+```json
+{
+    ...
+    "GOVAPI": {
+      "HOST": "http://localhost:5200",
+      ...
+    },
+    ...
+}
 ```
 
-Utilizzare il cookie di sessione restituito per inviare richieste ai servizi di govhub:
+### Show/Hide HeaderBar
 
-```bash
-curl -v --cookie "GOVHUB-JSESSIONID=0A8581FBDA2754C5DB3ADFB2E2018D29" -X GET 'http://localhost:11001/govregistry/users/1'
+```json
+{
+    ...
+    "Layout": {
+      "showHeaderBar": true,
+      ...
+    },
+    ...
+}
 ```
-
-***
-
-## Get
-
-```
-cd existing_repo
-git remote add origin https://gitlab.link.it/govhub/applications/govshell.git
-git branch -M main
-git push -uf origin main
-```
-
-***
-
-## Installazione
-
-I comandi SQL assumono l'utilizzo di postgres.
-
-Creare l'utenza SQL:
-
-```bash
-createuser --interactive
-```
-
-- Nome Utente: govhub
-- Password Utente: govhub
-
-
-Creare il database `govhub`
-
-```bash
-createdb 'govhub'
-```
-
-Creare lo schema per govshell
-
-```bash
-cd reverse-proxy
-psql govhub govhub < src/main/resources/govshell-schema.sql
-psql govhub govhub < src/main/resources/data-dev.sql
-```
-
-Creare la cartella di log:
-
-```bash
-mkdir /var/log/govshell
-```
-
-
-Eseguire l'applicazione:
-
-```bash
-mvn spring-boot:run -Dspring-boot.run.profiles=dev -Dspring-boot.run.arguments=--logging.level.org.springframework=TRACE
-```
-
-L'applicazione verrà deployata di default sulla porta 11001. Il database delle utenze viene popolato deployando govregistry.
-
-***
-## WAR
-
-Per ottenere un war deployabile su application server:
-
-
-```bash
-mvn package -P war -DskipTests
-```
-
-L'artefatto verrà prodotto sotto
-
-    target/govshell.war
-
-
-***
-## Configurazione
-
-Le applicazioni vengono cachate in modo da velocizzare il processo routing. Per modificare l'intervallo di pulizia della cache dell'anagrafica appilcazioni:
-
-    caching.govhub.applications.TTL = 300000
-
