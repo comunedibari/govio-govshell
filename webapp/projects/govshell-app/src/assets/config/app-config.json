@@ -12,7 +12,7 @@
     },
 
     "GOVAPI": {
-      "HOST": "http://10.10.100.44/govshell-reverse-proxy",
+      "HOST": "https://govhub.comune.bari.it/govshell-reverse-proxy",
       "LOGOUT_URL": "/logout"
     },
 
