@@ -55,7 +55,7 @@ export class ApiClient {
     this.conf = this.configService;
 
     this.conf.getConfig('app').subscribe(
-      (result: any) => { this.api_url = result.AppConfig.GOVAPI.HOST; }, 
+      (result: any) => { this.api_url = (result.AppConfig.GOVAPI.HOST + result.AppConfig.GOVAPI.VERSION); }, 
       (err: any) => console.error(err));
   }
 

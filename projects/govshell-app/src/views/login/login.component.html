@@ -86,7 +86,7 @@
               </h1>
             </div>
           </div>
-          <div class="mb-3">
+          <div class="mb-3" *ngIf="AUTH_USER">
             <div class="gl-w-half gl-xs-w-full gl-ml-auto gl-mr-auto bar">
               <div id="signin-container">
                 <div class="tab-content">
@@ -94,12 +94,12 @@
                     <div class="login-body">
                       <form novalidate class="new_user gl-show-field-errors js-sign-in-form" [formGroup]="_formGroup" (ngSubmit)="login(_formGroup.value)">
                         <div class="form-group gl-px-5 gl-pt-5">
-                          <label for="user_login" class="label-bold">{{ 'APP.LABEL.UsernameEmail' | translate }}</label>
+                          <label for="username" class="label-bold">{{ 'APP.LABEL.UsernameEmail' | translate }}</label>
                           <input class="form-control gl-form-input top" id="username" type="text" placeholder="{{ 'APP.PLACEHOLDER.UsernameEmail' | translate }}" formControlName="username" autofocus="autofocus" autocomplete="on" autocorrect="off">
                           <p *ngIf="f['username'].errors && f['username'].errors['required'] && f['username'].touched" class="help-block text-danger mb-0 gl-field-error">{{ 'APP.MESSAGE.LOGIN.UsernameRequired' | translate }}</p>
                         </div>
                         <div class="form-group gl-px-5">
-                          <label class="label-bold" for="user_password">{{ 'APP.LABEL.Password' | translate }}</label>
+                          <label for="password" class="label-bold" for="user_password">{{ 'APP.LABEL.Password' | translate }}</label>
                           <input class="form-control gl-form-input bottom" id="password" type="password" placeholder="Password" formControlName="password" autocomplete="on" passwordToggle>
                           <p *ngIf="f['password'].errors && f['password'].errors['required'] && f['password'].touched" class="help-block text-danger mb-0 gl-field-">{{ 'APP.MESSAGE.LOGIN.PasswordRequired' | translate }}</p>
                         </div>
@@ -119,7 +119,7 @@
                           <button type="submit" class="gl-button btn btn-block btn-confirm" [disabled]="_formGroup.invalid || loading">
                             {{ 'APP.BUTTON.Login' | translate }}<span class="spinner-border spinner-border-sm ms-2" *ngIf="loading"></span>
                           </button>
-                          </div>
+                        </div>
                       </form>
                     </div>
                   </div>
@@ -135,6 +135,24 @@
                 <!-- <div class="clearfix">
                 </div> -->
               </div>
+            </div>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="OTHER_AUTHS.length">
+          <div class="mb-3" [class.pt-5]="!AUTH_USER">
+            <div class="gl-w-half gl-xs-w-full gl-ml-auto gl-mr-auto">
+              <div class="gl-px-5" *ngIf="AUTH_USER">
+                <hr class="py-2">
+              </div>
+              <ng-container class="gl-px-5" *ngFor="let auth of OTHER_AUTHS">
+                <div class="gl-px-5" *ngIf="auth.enabled">
+                  <button type="button" class="gl-button btn btn-block btn-default" (click)="logidWithUrl(auth.signin_url)">
+                    <i class="bi bi-{{ auth.icon }} me-2" *ngIf="auth.icon"></i>
+                    <img class="me-2" width="16" height="16" [src]="'./assets/images/' + auth.image" *ngIf="auth.image && !auth.icon">
+                    <span>{{ auth.label | translate }}</span>
+                  </button>
+                </div>
+              </ng-container>
             </div>
           </div>
         </ng-container>

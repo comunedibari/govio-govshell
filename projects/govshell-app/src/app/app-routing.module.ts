@@ -20,7 +20,7 @@ const routes: Routes = [
   {
     path: '',
     component: GpLayoutComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     children: [
       {
         path: '_home',

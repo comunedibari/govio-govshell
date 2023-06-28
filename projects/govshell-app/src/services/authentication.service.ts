@@ -98,7 +98,7 @@ export class AuthenticationService {
 
   logout() {
     localStorage.removeItem(AUTH_CONST.storageSession);
-    let url = `${this.appConfig.GOVAPI['HOST']}${this.API_LOGOUT}`;
+    let url = `${this.appConfig.GOVAPI['HOST']}${this.appConfig.GOVAPI['VERSION']}${this.API_LOGOUT}`;
     return this.http.get(url);
   }
 

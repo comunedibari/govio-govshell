@@ -1,18 +1,18 @@
 {
   "/logout": {
-    "target": "http://172.16.1.121/govshell-reverse-proxy",
+    "target": "http://172.16.1.121/govhub-reverse-proxy",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true
   },
   "/do-login": {
-    "target": "http://172.16.1.121/govshell-reverse-proxy",
+    "target": "http://172.16.1.121/govhub-reverse-proxy",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true
   },
   "/profile": {
-    "target": "http://172.16.1.121/govshell-reverse-proxy",
+    "target": "http://172.16.1.121/govhub-reverse-proxy",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true,
@@ -21,7 +21,7 @@
     }
   },
   "/applications": {
-    "target": "http://172.16.1.121/govshell-reverse-proxy",
+    "target": "http://172.16.1.121/govhub-reverse-proxy",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true
