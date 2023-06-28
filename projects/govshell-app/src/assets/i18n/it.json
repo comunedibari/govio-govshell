@@ -18,7 +18,8 @@
 			"MoreInfo": "Ulteriori informazioni",
 			"Report": "Resoconto",
 			"Save": "Salva",
-			"Search": "Cerca"
+			"Search": "Cerca",
+			"SigninWithGitHub": "Accedi con Github"
 		},
 		"ENUM": {
 			"COMPLETATO": "Completato",
@@ -87,13 +88,13 @@
 			"EsportingFile": "Sto esportando il documento…",
 			"InsertNotice": "Inserisci il numero dell'avviso e premi il pulsante di ricerca …",
 			"LOGIN": {
-				"PasswordRequired": "Password richiesta",
-				"UsernameRequired": "Nome utente richiesto",
 				"login_400": "Username o password errati. Controlla la corretta scrittura dei dati.",
 				"login_401": "Username o password errati. Oppure non sei autorizzato ad accedere.",
 				"login_403": "Username o password errati. Oppure non sei autorizzato ad accedere.",
 				"login_404": "Risorsa non trovata.",
 				"login_422": "Username o password errati. Oppure non sei autorizzato ad accedere.",
+				"PasswordRequired": "Password richiesta",
+				"UsernameRequired": "Nome utente richiesto",
 				"valid_email": "Inserisci una mail valida",
 				"wrong_username_password": "Username o password errati. Controlla la corretta scrittura dei dati."
 			},

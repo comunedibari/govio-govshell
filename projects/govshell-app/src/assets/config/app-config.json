@@ -8,11 +8,15 @@
     "DELAY": "500",
 
     "AUTH_SETTINGS": { 
-      "DEVELOP": true
+      "DEVELOP": false,
+      "AUTH_USER": true,
+      "OTHER_AUTHS": [
+      ]
     },
 
     "GOVAPI": {
-      "HOST": "https://govhub.comune.bari.it/govshell-reverse-proxy",
+      "HOST": "https://govhub.comune.bari.it/govhub-reverse-proxy",
+      "VERSION": "/v1",
       "LOGOUT_URL": "/logout"
     },
 

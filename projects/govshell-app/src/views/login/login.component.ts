@@ -35,6 +35,9 @@ export class LoginComponent implements OnInit {
 
   _version: string = 'v2';
 
+  AUTH_USER: boolean = false;
+  OTHER_AUTHS: any[] = [];
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -43,6 +46,9 @@ export class LoginComponent implements OnInit {
     private configService: ConfigService
   ) {
     this.config = this.configService.getConfiguration();
+    this.AUTH_USER = this.config.AppConfig.AUTH_SETTINGS.AUTH_USER;
+    this.OTHER_AUTHS = this.config.AppConfig.AUTH_SETTINGS.OTHER_AUTHS;
+
     const _currentNav: Navigation | null = this.router.getCurrentNavigation();
     if (_currentNav?.extras.state) {
       if (_currentNav?.extras.state.from ) {
@@ -127,5 +133,9 @@ export class LoginComponent implements OnInit {
   _closeAlert() {
     this.error = null;
     this.errorCode = '';
+  }
+
+  logidWithUrl(url: string) {
+    window.location.href = url;
   }
 }
