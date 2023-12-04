@@ -15,7 +15,7 @@
     },
 
     "GOVAPI": {
-      "HOST": "https://govhub.comune.bari.it/govhub-reverse-proxy",
+      "HOST": "{{govhub_application_api_url}}",
       "VERSION": "/v1",
       "LOGOUT_URL": "/logout"
     },
