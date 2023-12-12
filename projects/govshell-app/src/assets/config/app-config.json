@@ -15,7 +15,7 @@
     },
 
     "GOVAPI": {
-      "HOST": "{{govhub_application_api_url}}",
+      "HOST": "{{govshell_application_api_url}}",
       "VERSION": "/v1",
       "LOGOUT_URL": "/logout"
     },
