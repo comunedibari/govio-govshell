@@ -11,18 +11,11 @@
       "DEVELOP": false,
       "AUTH_USER": true,
       "OTHER_AUTHS": [
-        {
-          "label": "Accedi con Github",
-          "icon": "github",
-          "image": "",
-          "enabled": true,
-          "signin_url": "http://172.16.1.121/govhub-reverse-proxy/oauth2/authorization/github"
-        }
       ]
     },
 
     "GOVAPI": {
-      "HOST": "http://172.16.1.121/govhub-reverse-proxy",
+      "HOST": "{{govshell_application_api_url}}",
       "VERSION": "/v1",
       "LOGOUT_URL": "/logout"
     },
@@ -49,19 +42,19 @@
     "Layout": {
       "Login": {
         "title": "GovHub",
-        "logo": "linkit_logo/linkit_logo_2x.png",
-        "header": "linkit_logo/linkit_logo_2x.png"
+        "logo": "logo-bari.png",
+        "header": "logo-bari.png"
       },
       "hasSideBar": false,
       "showHeaderBar": true,
-      "showFooterBar": false,
+      "showFooterBar": true,
       "showFooterExpander": true,
       "footerHeight": "48px",
-      "footerExpandedHeight": "436px",
+      "footerExpandedHeight": "501px",
       "footerExpandedOver": true,
       "Header": {
         "title": "GovHub",
-        "logo": "linkit_logo/linkit_logo_2x_reverse.png"
+        "logo": "logo-bari.png"
       },
       "forceMenuOpen": false,
       "Details": {
@@ -71,7 +64,7 @@
         }
       }
     },
-    "CurrentThems": "Default",
+    "CurrentThems": "Bari",
     "Themes": [
       {
         "Name": "Default",
@@ -102,59 +95,32 @@
         }
       },
       {
-        "Name": "Prussian Blue",
+        "Name": "Bari",
         "Variables": {
-          "--header-back-color": "#003049",
-          "--header-color": "#ffffff",
-          "--footer-back-color": "#003049",
+          "--border-color": "#dbdbdb",
+          "--header-back-color": "#ffffff",
+          "--header-color": "#303030",
+          "--footer-back-color": "#565759",
           "--footer-color": "#ffffff",
-          "--footer-expander-back-color": "#003049",
+          "--footer-expander-back-color": "#e20a16",
           "--footer-expander-color": "#ffffff",
-          "--navbar-back-color": "#f77f00",
+          "--navbar-back-color": "#f5f5f5",
           "--navbar-color": "#303030",
-          "--navbar-link-color": "#303030",
-          "--navbar-toggle-back-color": "#f77f00",
-          "--navbar-toggle-back-over-color": "#fcbf49",
+          "--navbar-link-color": "#e20a16",
+          "--navbar-toggle-back-color": "#f5f5f5",
+          "--navbar-toggle-back-over-color": "#dbdbdb",
           "--navbar-toggle-over-color": "#303030",
-          "--navbar-border-color": "#fcbf49",
+          "--navbar-border-color": "#dbdbdb",
           "--link-hover-color": "#003049",
-          "--fly-out-back-item": "#eae2b7",
-          "--fly-out-color-item": "#303030",
-          "--fly-out-back-top": "#eae2b7",
-          "--fly-out-color-top": "#303030",
-          "--fly-out-color-link": "#eae2b7",
-          "--btn-confirm": "#1f75cb",
-          "--btn-confirm-color": "#ffffff",
-          "--btn-confirm-hover": "#1068bf",
-          "--btn-confirm--hovershadow": "#064787"
-        }
-      },
-      {
-        "Name": "Persian Blue",
-        "Variables": {
-          "--header-back-color": "#072ac8",
-          "--header-color": "#ffffff",
-          "--footer-back-color": "#072ac8",
-          "--footer-color": "#ffffff",
-          "--footer-expander-back-color": "#072ac8",
-          "--footer-expander-color": "#ffffff",
-          "--navbar-back-color": "#a2d6f9",
-          "--navbar-color": "#303030",
-          "--navbar-link-color": "#303030",
-          "--navbar-toggle-back-color": "#a2d6f9",
-          "--navbar-toggle-back-over-color": "#1e96fc",
-          "--navbar-toggle-over-color": "#303030",
-          "--navbar-border-color": "#a2d6f9",
-          "--link-hover-color": "#072ac8",
-          "--fly-out-back-item": "#1e96fc",
+          "--fly-out-back-item": "#e20a16",
           "--fly-out-color-item": "#ffffff",
-          "--fly-out-back-top": "#1e96fc",
+          "--fly-out-back-top": "#e20a16",
           "--fly-out-color-top": "#ffffff",
-          "--fly-out-color-link": "#1e96fc",
-          "--btn-confirm": "#1f75cb",
+          "--fly-out-color-link": "#e20a16",
+          "--btn-confirm": "#e20a16",
           "--btn-confirm-color": "#ffffff",
-          "--btn-confirm-hover": "#1068bf",
-          "--btn-confirm--hovershadow": "#064787"
+          "--btn-confirm-hover": "#34393c",
+          "--btn-confirm--hovershadow": "#0f1011"
         }
       }
     ]
